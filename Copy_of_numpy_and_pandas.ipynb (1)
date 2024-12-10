@@ -1,0 +1,250 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "id": "2Wz-C1grCs-q"
+      },
+      "outputs": [],
+      "source": [
+        "import numpy as np"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##array and creation 1,2\n",
+        "a=np.arange(1,21)\n",
+        "print (a)\n",
+        "print (a[1:21:2])"
+      ],
+      "metadata": {
+        "id": "dpRdtwLFPp_j",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "cfe40c8b-ffa3-48ee-ecab-1adbf4a8d67d"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20]\n",
+            "[ 2  4  6  8 10 12 14 16 18 20]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# array and creation  3,4\n",
+        "a=np.random.randint(11,100,size=(5,4))\n",
+        "print (a)\n",
+        "b= a[(0,1,2),:]\n",
+        "c=b[:,(0,1)]\n",
+        "print(c)\n"
+      ],
+      "metadata": {
+        "id": "aNBQ7pxdPyHG"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##array manipulation\n",
+        "a=np.arange (1, 21)\n",
+        "b= a.reshape(4,5)\n",
+        "print (b)\n",
+        "\n",
+        "c= b. reshape(1,20)\n",
+        "print (c)\n",
+        "\n",
+        "d= np.random.randint(1,11,size=(5,2))\n",
+        "print(d)\n",
+        "\n",
+        "e=np.matmul(b,d)\n",
+        "print (e)"
+      ],
+      "metadata": {
+        "id": "OW0D4BeXQ0vA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##boolean and fancy indexing\n",
+        "\n",
+        "a= np.random.randint (1, 100,size=(50))\n",
+        "print(a)\n",
+        "\n",
+        "b=a[a>50]\n",
+        "print(b)\n",
+        "\n",
+        "##to get any random element from array\n",
+        "a[[1,2]]\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "xtmM8b1ujFsW"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##statistical operations\n",
+        "\n",
+        "a= np.random.randint (1,11,size=(2,4))\n",
+        "print(a)\n",
+        "b=np.max(a,axis=0)\n",
+        "c=np.sum(a,axis=0)\n",
+        "d=c/2\n",
+        "print(b)\n",
+        "print(c)\n",
+        "print(d)\n",
+        "# d prints the mean value\n",
+        "\n",
+        "b= a[a>d]\n",
+        "print(b)\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "Y1Fhdrs8kFLp",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "ce66ef38-ed62-4c17-9592-6a78dbdf4c71"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[10  2  8  7]\n",
+            " [ 7  6  3  5]]\n",
+            "[10  6  8  7]\n",
+            "[17  8 11 12]\n",
+            "[8.5 4.  5.5 6. ]\n",
+            "[10  8  7  6]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n"
+      ],
+      "metadata": {
+        "id": "60WOh22QpYNt"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##data exploration with pandas\n",
+        "##load the dataset\n",
+        "train= pd.read_csv('/content/california_housing_train.csv')\n",
+        "\n",
+        "\n",
+        "print (train.head(5))\n",
+        "print (train.tail(10))\n",
+        "##data summary\n",
+        "x=train.describe()\n",
+        "y=train['total_bedrooms'].unique()\n",
+        "z=train['total_bedrooms'].nunique()\n",
+        "print(x)\n",
+        "print(y)\n",
+        "print(z)"
+      ],
+      "metadata": {
+        "id": "Tj24WsHQp24o"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "train['total_bedrooms_per_total_rooms']=train['total_bedrooms']/train['total_rooms']\n",
+        "print(train.head())\n",
+        "\n",
+        "##to save the modified file\n",
+        "train.to_csv('train new.csv')"
+      ],
+      "metadata": {
+        "id": "BvdwtYEmWk_x"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "####to get mean and standard deviation of the new column\n",
+        "x=train['total_bedrooms_per_total_rooms'].std()\n",
+        "y=train['total_bedrooms_per_total_rooms'].mean()\n",
+        "print(x)\n",
+        "print(y)"
+      ],
+      "metadata": {
+        "id": "1a6T6Wp7YwI6"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "##rows with median income greater than 5\n",
+        "filtered_df = train[train['median_income'] > 5]\n",
+        "filtered_df"
+      ],
+      "metadata": {
+        "id": "IFRIjzjgdkhq"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "abc = train[train['total_rooms']>10000]\n",
+        "xyz = abc[abc['median_house_value']<150000]\n",
+        "print (xyz)"
+      ],
+      "metadata": {
+        "id": "QKQynQe4eJ4I"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
